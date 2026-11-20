@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>La jeunesse — apprendre par cœur</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff;--fg:#3c3c3c;--mut:#777;--line:#e5e5e5;--card:#f7f7f7;--g:#58cc02;--gd:#58a700;--gl:#d7ffb8;--gt:#2b6a00;--r:#ff4b4b;--rd:#ea2b2b;--rl:#ffdfe0;--rt:#b32020;--b:#1cb0f6;--bd:#1899d6;--y:#ffc800;--yd:#e5b400;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#131f24;--fg:#f1f7fb;--mut:#8fa3ad;--line:#37464f;--card:#1f2c33;--gl:#1d3a14;--gt:#9be15d;--rl:#3b1c1e;--rt:#ff9a9a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#131f24;--fg:#f1f7fb;--mut:#8fa3ad;--line:#37464f;--card:#1f2c33;--gl:#1d3a14;--gt:#9be15d;--rl:#3b1c1e;--rt:#ff9a9a;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+*,*:before,*:after{box-sizing:border-box}
+body{margin:0;height:100%;background:var(--bg);color:var(--fg);font:800 17px/1.4 Nunito,system-ui,sans-serif;-webkit-tap-highlight-color:transparent}
+#app{height:100%;max-width:640px;margin:auto;display:flex;flex-direction:column}
+.top{display:flex;align-items:center;gap:12px;padding:14px 16px}
+.chip{font-weight:900;padding:6px 12px;border-radius:14px;border:2px solid var(--line);white-space:nowrap}
+.x{background:none;border:0;color:var(--mut);font-size:26px;cursor:pointer;font-family:inherit}
+.bar{height:16px;border-radius:9px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--g);border-radius:9px;transition:width .4s;box-shadow:inset 0 5px 0 rgba(255,255,255,.25)}
+.scroll{flex:1;overflow-y:auto;padding:8px 20px 20px}
+h1{margin:6px 0 2px;font-size:30px;font-weight:900;text-align:center}
+.sub{text-align:center;color:var(--mut);margin-bottom:12px}
+.ft{padding:16px 20px;border-top:2px solid var(--line);transition:background .2s}
+.ft.ok{background:var(--gl);color:var(--gt)}.ft.ko{background:var(--rl);color:var(--rt)}
+#msg{margin-bottom:12px;font-size:19px;min-height:0}#msg b{font-size:22px;font-weight:900}
+.btn{width:100%;border:0;border-radius:16px;padding:15px;font:900 17px Nunito,sans-serif;letter-spacing:.8px;color:#fff;background:var(--g);box-shadow:0 5px 0 var(--gd);cursor:pointer;margin-bottom:5px}
+.btn:active:not(:disabled){transform:translateY(4px);box-shadow:0 1px 0 var(--gd)}
+.btn.r{background:var(--r);box-shadow:0 5px 0 var(--rd)}.btn.b{background:var(--b);box-shadow:0 5px 0 var(--bd)}
+.btn.w{background:var(--bg);color:var(--b);border:2px solid var(--line);box-shadow:0 4px 0 var(--line);margin-top:10px}
+.btn:disabled{background:var(--line);color:var(--mut);box-shadow:none;cursor:default;transform:none}
+.q{font-size:24px;font-weight:900;margin:8px 0 18px}
+.card{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:22px;font-size:22px;line-height:1.5;text-align:center;margin-bottom:18px}
+.txt{font-size:21px;line-height:2.4}
+.txt input{font:900 20px Nunito,sans-serif;text-align:center;color:var(--fg);background:var(--card);border:2px solid var(--line);border-bottom-width:4px;border-radius:12px;padding:2px 6px;margin:0 2px;max-width:100%}
+.txt input:focus{outline:0;border-color:var(--b)}
+.txt input.ok{background:var(--gl);border-color:var(--g);color:var(--gt)}.txt input.ko{background:var(--rl);border-color:var(--r);color:var(--rt)}
+textarea{width:100%;font:800 20px/1.5 Nunito,sans-serif;color:var(--fg);background:var(--card);border:2px solid var(--line);border-radius:16px;padding:14px;resize:none}
+textarea:focus{outline:0;border-color:var(--b)}
+.zone{min-height:120px;display:flex;flex-wrap:wrap;gap:8px;align-content:flex-start;padding:10px 0;border-top:2px solid var(--line);border-bottom:2px solid var(--line);margin-bottom:20px}
+.zone.ok{border-color:var(--g)}.zone.ko{border-color:var(--r)}
+.bank{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.chipw{font:800 17px Nunito,sans-serif;color:var(--fg);background:var(--bg);border:2px solid var(--line);border-bottom-width:4px;border-radius:14px;padding:8px 13px;cursor:pointer}
+.chipw.ghost{background:var(--line);color:transparent;border-color:var(--line);cursor:default}
+.combo{color:#ff9600;font-weight:900;margin-bottom:6px}
+.shake{animation:sh .4s}@keyframes sh{20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+.path{display:flex;flex-direction:column;gap:14px;margin:18px 0 8px}
+.node{display:flex;align-items:center;gap:12px;cursor:pointer;width:max-content;max-width:100%}
+.ring{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;flex:none;box-shadow:0 5px 0 var(--line);transition:transform .1s}
+.node:active .ring{transform:scale(.93)}
+.ring span{width:48px;height:48px;border-radius:50%;background:var(--bg);display:grid;place-items:center;font-weight:900;font-size:19px}
+.node small{color:var(--mut);font-weight:800;max-width:160px}
+.pop{animation:pop .5s}@keyframes pop{50%{transform:scale(1.15)}}
+.big{font-size:64px;text-align:center;margin:20px 0 4px}
+.stats{display:flex;gap:10px;justify-content:center;margin:16px 0}
+.stat{border:2px solid var(--line);border-radius:16px;padding:10px 18px;text-align:center}.stat b{display:block;font-size:24px}
+.cf{position:fixed;top:-30px;font-size:24px;animation:fall 2.4s linear forwards;pointer-events:none;z-index:9}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg)}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+const P=[
+["La jeunesse n’est pas une période de la vie, elle est un état,","un effet de la volonté, une qualité de l’imagination, une intensité émotive,","une victoire du courage sur la timidité, du goût de l’aventure sur l’amour du confort."],
+["On ne devient pas vieux pour avoir vécu un certain nombre d’années :","on devient vieux parce qu’on a déserté son idéal.","Les années rident la peau, renoncer à son idéal ride l’âme.","Les préoccupations, les doutes, les craintes et les désespoirs sont les ennemis qui, lentement, nous font pencher vers la terre et devenir poussière avant la mort."],
+["Jeune est celui qui s’étonne, qui s’émerveille.","Il demande comme l’enfant insatiable : « Et après ? ».","Il défie les évènements et trouve de la joie au jeu de la vie."],
+["Vous êtes aussi jeune que votre foi. Aussi vieux que votre doute.","Aussi jeune que votre confiance en vous-même. Aussi jeune que votre espoir. Aussi vieux que votre abattement.","Vous resterez jeune tant que vous resterez réceptif.","Réceptif à ce qui est beau, bon et grand. Réceptif aux messages de la nature, de l’homme et de l’infini.","Si un jour votre cœur allait être mordu par le pessimisme et rongé par le cynisme, puisse Dieu avoir pitié de votre âme de vieillard."]];
+const CH=P.flat().map(t=>({t})),FULL=P.map(p=>p.join(" ")).join("\n\n");
+const EX=[["t",.2],["o",0],["t",.5],["t",.8],["m",3],["m",0]],IV=[0,1,2,4,8,16],PR=["Parfait !","Génial !","Excellent !","Bien joué !","Tu l’as !","Magnifique !"];
+const $=s=>document.querySelector(s),app=$("#app");
+let S;try{S=JSON.parse(localStorage.getItem("jv2"))}catch(e){}
+S=S||{c:{},xp:0,st:0,last:"",goal:{d:"",n:0}};
+const sv=()=>{try{localStorage.setItem("jv2",JSON.stringify(S))}catch(e){}};
+const day=(o=0)=>new Date(Date.now()-new Date().getTimezoneOffset()*6e4+o*864e5).toISOString().slice(0,10);
+const C=k=>S.c[k]||(S.c[k]={b:0,d:day(),s:0});
+const norm=s=>s.toLowerCase().replace(/’/g,"'").replace(/œ/g,"oe").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]/g,"");
+const shuf=a=>{a=a.slice();for(let k=a.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[a[k],a[j]]=[a[j],a[k]]}return a};
+const lcs=(a,b)=>{const d=Array(b.length+1).fill(0);for(const x of a){let p=0;for(let j=1;j<=b.length;j++){const t=d[j];d[j]=x==b[j-1]?p+1:Math.max(d[j],d[j-1]);p=t}}return d[b.length]};
+function merge(tk){const o=[];let pre="";for(const t of tk){if(!norm(t)){if(t[0]=="«"||!o.length)pre=t;else o[o.length-1]+=" "+t}else{o.push(pre?pre+" "+t:t);pre=""}}return o}
+let A;const snd=(f,t=.12,ty="sine")=>{try{A=A||new AudioContext();const o=A.createOscillator(),g=A.createGain();o.type=ty;o.frequency.value=f;g.gain.value=.07;o.connect(g);g.connect(A.destination);o.start();o.stop(A.currentTime+t)}catch(e){}};
+const streak=()=>(S.last==day()||S.last==day(-1))?S.st:0;
+const due=()=>{const r=[],n=[];CH.forEach((_,k)=>{const c=C(k);if(!c.s)n.push(k);else if(c.d<=day())r.push(k)});return r.concat(n.slice(0,5)).slice(0,12)};
+
+function home(){
+ const g=S.goal.d==day()?S.goal.n:0,m=Math.round(CH.reduce((s,_,k)=>s+C(k).b,0)/(5*CH.length)*100),d=due();
+ const nodes=CH.map((c,k)=>{const x=C(k),b=x.b,col=b>=5?"var(--y)":"var(--g)";
+  return `<div class=node style="margin-left:${Math.round(Math.sin(k*1.1)*55+55)}px" onclick="start([${k}])"><div class=ring style="background:conic-gradient(${col} ${b*72}deg,var(--line) 0)"><span>${b>=5?"👑":x.s?k+1:"🌱"}</span></div><small>${c.t.split(" ").slice(0,3).join(" ")}…</small></div>`}).join("");
+ app.innerHTML=`<div class=top><div class=chip>🔥 ${streak()}</div><div class=chip>⭐ ${S.xp}</div><div class=chip style="margin-left:auto">🎯 ${Math.min(g,5)}/5</div></div>
+ <div class=scroll><h1>La jeunesse</h1><div class=sub>Maîtrise globale : ${m} %</div><div class=bar><i style="width:${m}%"></i></div><div class=path>${nodes}</div></div>
+ <div class=ft><button class=btn onclick="start(due())">${d.length?"SESSION DU JOUR · "+d.length:"TOUT RÉVISER"}</button><button class="btn w" onclick="read()">📖 LIRE LE TEXTE</button></div>`;
+ window.go=null;
+}
+function read(){app.innerHTML=`<div class=top><button class=x onclick="home()">✕</button></div><div class=scroll><div class=card style="white-space:pre-wrap;text-align:left">${FULL}</div></div>`}
+
+let Q,T,D,H,combo,fails,gain,i;
+function start(l){if(l===undefined)return;if(!l.length)l=shuf(CH.map((_,k)=>k)).slice(0,12);Q=l.slice();T=Q.length;D=0;H=5;combo=0;fails=new Set;gain=0;next()}
+function next(){if(!Q.length)return end();if(H<=0)return end(1);i=Q.shift();C(i).s?ex():disc()}
+function shell(b){app.innerHTML=`<div class=top><button class=x onclick="home()">✕</button><div class=bar style="flex:1"><i style="width:${D/T*100}%"></i></div><div class=chip>❤️ ${H}</div></div><div class=scroll id=mn>${combo>1?`<div class=combo>🔥 ${combo} d’affilée</div>`:""}${b}</div><div class=ft id=ft><div id=msg></div><button class=btn id=go disabled>VÉRIFIER</button></div>`}
+const en=v=>{$("#go").disabled=!v};
+function say(){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(CH[i].t);u.lang="fr-FR";speechSynthesis.speak(u)}catch(e){}}
+function disc(){shell(`<p class=q>Nouveau ! Lis, puis répète à voix haute</p><div class=card>${CH[i].t}</div><button class="btn b" onclick="say()">🔊 ÉCOUTER</button>`);en(1);const g=$("#go");g.textContent="J’AI COMPRIS";g.onclick=()=>{C(i).s=1;sv();ex()}}
+function ex(){const[k,p]=EX[C(i).b];({t:tTrous,o:tOrdre,m:tMem})[k](p)}
+
+function tTrous(p){
+ const tk=CH[i].t.split(" "),cand=tk.map((w,k)=>norm(w)?k:-1).filter(k=>k>=0),n=Math.max(1,Math.round(p*cand.length)),lg=cand.filter(x=>norm(tk[x]).length>3),pool=p<.6&&lg.length>=n?lg:cand,h=new Set(shuf(pool).slice(0,n));
+ shell(`<p class=q>Complète les mots manquants</p><div class=txt>${tk.map((w,x)=>h.has(x)?`<input data-x=${x} size=${Math.max(3,w.length)} autocomplete=off autocapitalize=off spellcheck=false>`:w).join(" ")}</div>`);
+ const ins=[...document.querySelectorAll(".txt input")];ins[0].focus();
+ ins.forEach((e,k)=>{e.oninput=()=>en(ins.some(z=>z.value.trim()));e.onkeydown=ev=>{if(ev.key=="Enter"&&ins[k+1]){ev.preventDefault();ev.stopPropagation();ins[k+1].focus()}}});
+ $("#go").onclick=()=>{let ok=true;ins.forEach(e=>{const g=norm(e.value)==norm(tk[e.dataset.x]);if(!g){ok=false;e.value=tk[e.dataset.x]}e.className=g?"ok":"ko";e.disabled=true});fb(ok)};
+}
+function tOrdre(){
+ const tk=merge(CH[i].t.split(" "));let o=shuf(tk.map((w,k)=>[w,k])),ans=[];
+ for(let t=0;t<9&&tk.length>1&&o.every(([w],k)=>w==tk[k]);t++)o=shuf(o);
+ shell(`<p class=q>Remets la phrase dans l’ordre</p><div class=zone id=an></div><div class=bank id=bk></div>`);
+ const an=$("#an"),bk=$("#bk"),el=(t,f,c)=>{const b=document.createElement("button");b.className="chipw "+(c||"");b.textContent=t;if(f)b.onclick=f;return b};
+ const draw=()=>{an.innerHTML=bk.innerHTML="";ans.forEach(a=>an.append(el(a[0],()=>{ans.splice(ans.indexOf(a),1);draw()})));o.forEach(a=>bk.append(ans.includes(a)?el(a[0],0,"ghost"):el(a[0],()=>{ans.push(a);snd(520,.05);draw()})));en(ans.length==o.length)};
+ draw();
+ $("#go").onclick=()=>{const ok=ans.every(([w],k)=>w==tk[k]);an.classList.add(ok?"ok":"ko");bk.innerHTML="";fb(ok)};
+}
+function tMem(h){
+ const tk=CH[i].t.split(" ");
+ shell(`<p class=q>${h?"Écris la suite de mémoire ("+h+" mots offerts)":"Écris tout de mémoire, sans indice !"}</p><textarea id=ta rows=5 spellcheck=false></textarea>`);
+ const ta=$("#ta");ta.value=tk.slice(0,h).join(" ")+(h?" ":"");ta.focus();ta.oninput=()=>en(ta.value.trim().split(/\s+/).length>h);
+ $("#go").onclick=()=>{const a=ta.value.split(/\s+/).map(norm).filter(Boolean),b=tk.map(norm).filter(Boolean),ok=a.length>0&&lcs(a,b)*2/(a.length+b.length)>=.9;ta.disabled=true;fb(ok)};
+}
+function fb(ok){
+ const ft=$("#ft"),g=$("#go");ft.className="ft "+(ok?"ok":"ko");
+ if(ok){combo++;snd(660);setTimeout(()=>snd(880),90);$("#msg").innerHTML=`<b>${PR[Math.floor(Math.random()*PR.length)]}</b>${combo>1?" 🔥 ×"+combo:""}`;$("#mn").classList.add("pop")}
+ else{combo=0;H--;snd(160,.3,"sawtooth");$("#msg").innerHTML=`<b>Bonne réponse :</b><br>${CH[i].t}`;$("#mn").classList.add("shake")}
+ g.textContent="CONTINUER";g.disabled=false;g.className="btn "+(ok?"":"r");g.onclick=()=>fin(ok);
+}
+function fin(ok){
+ const c=C(i);
+ if(ok){const f=fails.has(i);if(!f)c.b=Math.min(5,c.b+1);c.d=day(IV[f?Math.max(1,c.b):c.b]);const x=10+Math.min(combo,5)*2;gain+=x;S.xp+=x;D++;if(S.goal.d!=day())S.goal={d:day(),n:0};S.goal.n++}
+ else{c.b=Math.max(0,c.b-1);c.d=day();fails.add(i);Q.push(i)}
+ sv();next();
+}
+function end(dead){
+ if(D>0&&S.last!=day()){S.st=S.last==day(-1)?S.st+1:1;S.last=day();sv()}
+ app.innerHTML=`<div class=scroll><div class=big>${dead?"💔":"🎉"}</div><h1>${dead?"Plus de cœurs !":"Session terminée !"}</h1><div class=sub>${dead?"Tes erreurs reviendront en priorité. Reviens vite !":"Tu es en train de devenir inoubliable."}</div><div class=stats><div class=stat>⭐<b>+${gain}</b>XP</div><div class=stat>🔥<b>${streak()}</b>jour(s)</div><div class=stat>🎯<b>${Math.min(S.goal.d==day()?S.goal.n:0,5)}/5</b>objectif</div></div></div><div class=ft><button class=btn onclick="home()">CONTINUER</button></div>`;
+ if(!dead){snd(523,.15);setTimeout(()=>snd(659,.15),150);setTimeout(()=>snd(784,.3),300);for(let k=0;k<36;k++){const e=document.createElement("div");e.className="cf";e.textContent=["🎉","✨","🌱","⭐"][k%4];e.style.left=Math.random()*100+"vw";e.style.animationDelay=Math.random()*.8+"s";document.body.append(e);setTimeout(()=>e.remove(),3400)}}
+}
+document.addEventListener("keydown",e=>{const g=$("#go");if(e.key=="Enter"&&g&&!g.disabled&&g.onclick&&e.target.tagName!="TEXTAREA"){e.preventDefault();g.click()}});
+home();
+</script>
+</body>
+</html>
